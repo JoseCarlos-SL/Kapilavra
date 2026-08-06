@@ -112,7 +112,6 @@ button {
    3. CABEÇALHO
    ============================================================ */
 .cabecalho {
-  background: var(--superficie);
   padding: 12px 16px 10px;
   display: flex;
   flex-direction: column;
