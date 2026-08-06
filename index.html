@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="claro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="KapivaTermo — Descubra a palavra secreta de 5 letras em até 6 tentativas. Jogo educacional de palavras em português." />
+  <meta name="theme-color" content="#005CA9" />
+  <title>Kapilavra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===================== CABEÇALHO ===================== -->
+  <header class="cabecalho" role="banner">
+
+    <div class="cabecalho-topo">
+      <button id="btn-stats" class="btn-topo btn-menu" aria-label="Estatísticas e Menu" title="Estatísticas">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+
+      <div class="cabecalho-logo-bloco">
+        <h1 class="logo-kapivara">KAPIlAVRA</h1>
+        <span class="logo-termo">TERMO</span>
+      </div>
+
+      <div class="cabecalho-direitos">
+        <button id="btn-tema" class="btn-topo" aria-label="Alternar tema" title="Alternar tema">
+          <svg id="icone-tema" width="20" height="20" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+
+        <button id="btn-ajuda" class="btn-topo btn-ajuda-circulo" aria-label="Como jogar" title="Como jogar">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <p class="subtitulo-jogo">Adivinhe a palavra da semana!</p>
+
+  </header>
+
+  <!-- ===================== PRINCIPAL ===================== -->
+  <main class="principal" id="conteudo-principal">
+
+    <!-- Toasts / Mensagens -->
+    <div id="area-mensagem" class="area-mensagem" role="status"
+         aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Tabuleiro -->
+    <section class="secao-tabuleiro" aria-label="Tabuleiro de tentativas">
+      <div id="tabuleiro" role="grid"
+           aria-label="Grade do jogo: 6 tentativas de 5 letras"></div>
+    </section>
+
+    <!-- Teclado Virtual -->
+    <section class="secao-teclado" aria-label="Teclado virtual">
+      <div id="teclado" role="group"
+           aria-label="Teclado de letras para jogar"></div>
+    </section>
+
+  </main>
+
+  <!-- ===================== RODAPÉ ===================== -->
+  <footer class="rodape" role="contentinfo">
+    <p>Desenvolvido para fins educacionais &mdash; <span id="ano-atual"></span></p>
+  </footer>
+
+  <!-- ===================== OVERLAY ===================== -->
+  <div id="modal-overlay" class="modal-overlay" hidden aria-hidden="true"></div>
+
+  <!-- ===================== MODAL: AJUDA ===================== -->
+  <div id="modal-ajuda" class="modal" role="dialog"
+       aria-modal="true" aria-labelledby="titulo-ajuda" hidden>
+    <div class="modal-caixa">
+
+      <div class="modal-cabecalho">
+        <h2 id="titulo-ajuda">Como Jogar</h2>
+        <button class="btn-fechar" data-modal="modal-ajuda" aria-label="Fechar instruções">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-corpo">
+
+        <p class="ajuda-intro">
+          Descubra a palavra secreta em <strong>6 tentativas</strong>.
+          Cada tentativa deve ser uma palavra válida de <strong>5 letras</strong>.
+        </p>
+
+        <h3>Cores das letras</h3>
+
+        <!-- Exemplo: correta -->
+        <div class="exemplo-bloco">
+          <div class="exemplo-linha" aria-label="Exemplo: T na posição correta">
+            <div class="celula-ex correta">T</div>
+            <div class="celula-ex ausente">E</div>
+            <div class="celula-ex ausente">R</div>
+            <div class="celula-ex ausente">M</div>
+            <div class="celula-ex ausente">O</div>
+          </div>
+          <p><span class="badge badge-verde">Verde</span> — letra na posição correta</p>
+        </div>
+
+        <!-- Exemplo: presente -->
+        <div class="exemplo-bloco">
+          <div class="exemplo-linha" aria-label="Exemplo: A presente mas na posição errada">
+            <div class="celula-ex ausente">C</div>
+            <div class="celula-ex presente">A</div>
+            <div class="celula-ex ausente">M</div>
+            <div class="celula-ex ausente">P</div>
+            <div class="celula-ex ausente">O</div>
+          </div>
+          <p><span class="badge badge-laranja">Laranja</span> — letra existe, posição errada</p>
+        </div>
+
+        <!-- Exemplo: ausente -->
+        <div class="exemplo-bloco">
+          <div class="exemplo-linha" aria-label="Exemplo: N não está na palavra">
+            <div class="celula-ex ausente">B</div>
+            <div class="celula-ex ausente">A</div>
+            <div class="celula-ex cinza">N</div>
+            <div class="celula-ex ausente">C</div>
+            <div class="celula-ex ausente">O</div>
+          </div>
+          <p><span class="badge badge-cinza">Cinza</span> — letra não está na palavra</p>
+        </div>
+
+        <p class="ajuda-rodape">
+          🗓️ A palavra muda toda semana e é a mesma para todos os jogadores!
+        </p>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== MODAL: ESTATÍSTICAS ===================== -->
+  <div id="modal-stats" class="modal" role="dialog"
+       aria-modal="true" aria-labelledby="titulo-stats" hidden>
+    <div class="modal-caixa">
+
+      <div class="modal-cabecalho">
+        <h2 id="titulo-stats">Estatísticas</h2>
+        <button class="btn-fechar" data-modal="modal-stats" aria-label="Fechar estatísticas">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-corpo" id="conteudo-stats">
+        <!-- Preenchido pelo JavaScript -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== MODAL: RESULTADO ===================== -->
+  <div id="modal-resultado" class="modal" role="dialog"
+       aria-modal="true" aria-labelledby="titulo-resultado" hidden>
+    <div class="modal-caixa">
+
+      <div class="modal-cabecalho">
+        <h2 id="titulo-resultado"></h2>
+        <button class="btn-fechar" data-modal="modal-resultado" aria-label="Fechar resultado">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-corpo">
+        <p id="resultado-mensagem" class="resultado-msg"></p>
+        <p id="resultado-palavra" class="resultado-palavra"></p>
+
+        <div id="resultado-emojis" class="resultado-emojis"
+             aria-label="Seu resultado representado em emojis"></div>
+
+        <div class="resultado-acoes">
+          <button id="btn-compartilhar" class="btn-primario" aria-label="Compartilhar resultado">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+              <circle cx="18" cy="5" r="3"/>
+              <circle cx="6" cy="12" r="3"/>
+              <circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+            Compartilhar
+          </button>
+          <button id="btn-ver-stats" class="btn-secundario" aria-label="Ver estatísticas">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+            Ver Estatísticas
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts carregados com defer para garantir a ordem correta -->
+  <script src="palavras.js" defer></script>
+  <script src="script.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,768 @@
+/* ============================================================
+   KapivaTermo — Estilos Globais (Novo Design)
+   Inspirado no protótipo: Logo Kapivara (Laranja) + Termo (Azul Marinho)
+   Bordas do tabuleiro em Azul Marinho, Teclado com teclas Marinho e Enter/Apagar Laranja
+   ============================================================ */
+
+/* ============================================================
+   1. VARIÁVEIS E TEMAS
+   ============================================================ */
+:root {
+  /* Cores da Identidade Visual */
+  --laranja-marca:  #FF6B00;
+  --laranja-hover:  #e05e00;
+  --azul-marinho:   #0A2540;
+  --azul-hover:     #071a2e;
+  
+  --verde-acerto:   #22A06B;
+  --laranja-alerta: #F7941D;
+  --cinza-erro:     #6B7280;
+
+  /* Superfícies (Tema Claro) */
+  --bg:             #FFFFFF;
+  --superficie:     #FFFFFF;
+  --texto:          #0A2540;
+  --subtitulo:      #0A2540;
+  --texto-mudo:     #6B7280;
+  --borda:          #E2E8F0;
+  --borda-forte:    #CBD5E1;
+
+  /* Células do tabuleiro */
+  --celula-bg:          #FFFFFF;
+  --celula-borda:       #0A2540;
+  --celula-borda-ativa: #FF6B00;
+  --celula-borda-cheia: #0A2540;
+  --celula-texto:       #0A2540;
+
+  /* Teclas */
+  --tecla-bg:           #0A2540;
+  --tecla-hover:        #153a5e;
+  --tecla-texto:        #FFFFFF;
+  
+  --tecla-especial-bg:    #FF6B00;
+  --tecla-especial-hover: #e05e00;
+  --tecla-especial-texto: #FFFFFF;
+
+  /* Modais */
+  --modal-bg:     #FFFFFF;
+  --overlay:      rgba(10, 37, 64, 0.5);
+
+  /* Utilitários */
+  --raio-sm:    6px;
+  --raio-md:    10px;
+  --raio-lg:    18px;
+  --trans:      150ms ease;
+}
+
+/* Tema Escuro */
+[data-tema="escuro"] {
+  --bg:             #0B131F;
+  --superficie:     #142032;
+  --texto:          #F8FAFC;
+  --subtitulo:      #94A3B8;
+  --texto-mudo:     #94A3B8;
+  --borda:          #1E293B;
+  --borda-forte:    #334155;
+
+  --celula-bg:          #142032;
+  --celula-borda:       #3880FF;
+  --celula-borda-ativa: #FF6B00;
+  --celula-borda-cheia: #3880FF;
+  --celula-texto:       #F8FAFC;
+
+  --tecla-bg:           #1E293B;
+  --tecla-hover:        #334155;
+  --tecla-texto:        #F8FAFC;
+
+  --modal-bg:  #142032;
+  --overlay:   rgba(0, 0, 0, 0.75);
+}
+
+/* ============================================================
+   2. RESET E BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg);
+  color: var(--texto);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 200ms ease, color 200ms ease;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ============================================================
+   3. CABEÇALHO
+   ============================================================ */
+.cabecalho {
+  background: var(--superficie);
+  padding: 12px 16px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  flex-shrink: 0;
+}
+
+.cabecalho-topo {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cabecalho-logo-bloco {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.logo-kapivara {
+  font-size: 1.65rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: var(--laranja-marca);
+  text-transform: uppercase;
+}
+
+.logo-termo {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--azul-marinho);
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+
+[data-tema="escuro"] .logo-termo {
+  color: #3880FF;
+}
+
+.subtitulo-jogo {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--subtitulo);
+  margin-top: 14px;
+  text-align: center;
+}
+
+/* Botões do topo */
+.cabecalho-direitos {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-topo {
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: transparent;
+  color: var(--laranja-marca);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--trans), transform 80ms;
+}
+
+.btn-topo:hover  { background: rgba(255, 107, 0, 0.1); }
+.btn-topo:active { transform: scale(0.90); }
+.btn-topo:focus-visible {
+  outline: 2px solid var(--laranja-marca);
+  outline-offset: 2px;
+}
+
+.btn-ajuda-circulo {
+  color: var(--laranja-marca);
+}
+
+/* ============================================================
+   4. LAYOUT PRINCIPAL
+   ============================================================ */
+.principal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 12px 16px;
+  gap: 14px;
+}
+
+/* ============================================================
+   5. MENSAGENS TOAST
+   ============================================================ */
+.area-mensagem {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+  width: max-content;
+  max-width: 90vw;
+}
+
+.toast {
+  background-color: var(--azul-marinho);
+  color: #FFFFFF;
+  padding: 9px 20px;
+  border-radius: 99px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  animation: toastEntrar 180ms ease forwards;
+  white-space: nowrap;
+}
+
+.toast-saindo {
+  animation: toastSair 200ms ease forwards !important;
+}
+
+@keyframes toastEntrar {
+  from { opacity: 0; transform: translateY(-10px) scale(0.92); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes toastSair {
+  to { opacity: 0; transform: translateY(-8px); }
+}
+
+/* ============================================================
+   6. TABULEIRO
+   ============================================================ */
+.secao-tabuleiro {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#tabuleiro {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.linha-tabuleiro {
+  display: flex;
+  gap: 6px;
+}
+
+/* Células estilo moldura da imagem (Borda azul marinho espessa) */
+.celula {
+  width: 56px;
+  height: 56px;
+  border: 2px solid var(--celula-borda);
+  border-radius: var(--raio-md);
+  background-color: var(--celula-bg);
+  color: var(--celula-texto);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  user-select: none;
+  transition: border-color var(--trans), background-color var(--trans);
+}
+
+/* Borda destaca na célula ativa */
+.linha-ativa .celula:not(.revelada) {
+  border-color: var(--celula-borda-ativa);
+}
+
+/* Cores reveladas */
+.celula.revelada.correta  { background: var(--verde-acerto);   border-color: var(--verde-acerto);   color: #fff; }
+.celula.revelada.presente { background: var(--laranja-alerta); border-color: var(--laranja-alerta); color: #fff; }
+.celula.revelada.ausente  { background: var(--cinza-erro);    border-color: var(--cinza-erro);    color: #fff; }
+
+/* ============================================================
+   7. ANIMAÇÕES DO TABULEIRO
+   ============================================================ */
+@keyframes pop {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  15%  { transform: translateX(-6px); }
+  30%  { transform: translateX(6px); }
+  45%  { transform: translateX(-5px); }
+  60%  { transform: translateX(5px); }
+  75%  { transform: translateX(-3px); }
+  90%  { transform: translateX(3px); }
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  30% { transform: translateY(-18px); }
+  60% { transform: translateY(-9px); }
+  80% { transform: translateY(-4px); }
+}
+
+.anim-pop    { animation: pop    120ms ease; }
+.anim-shake  { animation: shake  480ms ease; }
+.anim-bounce { animation: bounce 620ms ease; }
+
+/* ============================================================
+   8. TECLADO VIRTUAL (Inspirado no Design da Imagem)
+   ============================================================ */
+.secao-teclado {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+}
+
+#teclado {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.linha-teclado {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* Teclas gerais em Azul Marinho */
+.tecla {
+  flex: 1;
+  min-width: 0;
+  max-width: 40px;
+  height: 54px;
+  border: none;
+  border-radius: var(--raio-md);
+  background-color: var(--tecla-bg);
+  color: var(--tecla-texto);
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--trans), color var(--trans), transform 80ms;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Teclas Especiais (ENTER e APAGAR em Laranja) */
+.tecla-wide {
+  flex: 1.5;
+  max-width: 64px;
+  background-color: var(--tecla-especial-bg);
+  color: var(--tecla-especial-texto);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.tecla:hover             { background-color: var(--tecla-hover); }
+.tecla-wide:hover        { background-color: var(--tecla-especial-hover); }
+.tecla:active            { transform: scale(0.92); }
+.tecla:focus-visible {
+  outline: 2px solid var(--laranja-marca);
+  outline-offset: 2px;
+}
+
+/* Cores das teclas quando reveladas */
+.tecla.correta  { background: var(--verde-acerto) !important;   color: #fff !important; }
+.tecla.presente { background: var(--laranja-alerta) !important; color: #fff !important; }
+.tecla.ausente  { background: #475569 !important;               color: #fff !important; opacity: 0.7; }
+
+/* ============================================================
+   9. OVERLAY E MODAIS
+   ============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--overlay);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 90;
+}
+
+.modal-overlay[hidden] { display: none; }
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 16px;
+  pointer-events: none;
+}
+
+.modal[hidden] { display: none; }
+
+.modal-caixa {
+  pointer-events: auto;
+  background-color: var(--modal-bg);
+  border-radius: var(--raio-lg);
+  width: 100%;
+  max-width: 440px;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  animation: entrarModal 240ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes entrarModal {
+  from { opacity: 0; transform: scale(0.86) translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.modal-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px 0;
+  position: sticky;
+  top: 0;
+  background-color: var(--modal-bg);
+  z-index: 1;
+}
+
+.modal-cabecalho h2 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--texto);
+}
+
+.btn-fechar {
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: var(--borda);
+  color: var(--texto-mudo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--trans), color var(--trans);
+  flex-shrink: 0;
+}
+
+.btn-fechar:hover {
+  background: var(--borda-forte);
+  color: var(--texto);
+}
+
+.modal-corpo {
+  padding: 16px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Modal Ajuda */
+.ajuda-intro {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--texto);
+}
+
+.modal-corpo h3 {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--texto-mudo);
+}
+
+.exemplo-bloco {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.exemplo-linha {
+  display: flex;
+  gap: 4px;
+}
+
+.celula-ex {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--raio-md);
+  border: 2px solid var(--celula-borda);
+  background-color: var(--celula-bg);
+  color: var(--celula-texto);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.celula-ex.correta  { background: var(--verde-acerto);   border-color: var(--verde-acerto);   color: #fff; }
+.celula-ex.presente { background: var(--laranja-alerta); border-color: var(--laranja-alerta); color: #fff; }
+.celula-ex.ausente  { background: var(--cinza-erro);    border-color: var(--cinza-erro);    color: #fff; }
+.celula-ex.cinza    { background: var(--cinza-erro);    border-color: var(--cinza-erro);    color: #fff; }
+
+.badge {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 99px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.badge-verde   { background: var(--verde-acerto); }
+.badge-laranja { background: var(--laranja-alerta); }
+.badge-cinza   { background: var(--cinza-erro); }
+
+.ajuda-rodape {
+  font-size: 0.8rem;
+  color: var(--texto-mudo);
+  text-align: center;
+  border-top: 1px solid var(--borda);
+  padding-top: 10px;
+}
+
+/* Modal Estatísticas */
+.stats-resumo {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  text-align: center;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.stat-valor {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--laranja-marca);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--texto-mudo);
+}
+
+.dist-titulo {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--texto-mudo);
+}
+
+.distribuicao {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.dist-linha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dist-numero {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--texto-mudo);
+  min-width: 14px;
+  text-align: center;
+}
+
+.dist-barra-wrapper {
+  flex: 1;
+  background-color: var(--borda);
+  border-radius: var(--raio-sm);
+  height: 24px;
+  overflow: hidden;
+}
+
+.dist-barra {
+  height: 100%;
+  background-color: var(--azul-marinho);
+  border-radius: var(--raio-sm);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fff;
+  min-width: 24px;
+  transition: width 500ms ease;
+}
+
+.dist-barra-atual { background-color: var(--laranja-marca); }
+
+/* Modal Resultado */
+.resultado-msg {
+  font-size: 0.95rem;
+  color: var(--texto);
+  text-align: center;
+  font-weight: 600;
+}
+
+.resultado-palavra {
+  font-size: 0.9rem;
+  color: var(--texto);
+  text-align: center;
+}
+
+.resultado-palavra strong {
+  color: var(--laranja-marca);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.resultado-emojis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 12px;
+  background: var(--bg);
+  border-radius: var(--raio-md);
+  border: 1px solid var(--borda);
+}
+
+.emoji-linha {
+  font-size: 1.35rem;
+  letter-spacing: 2px;
+  line-height: 1.3;
+}
+
+.resultado-acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-primario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--raio-md);
+  background: var(--laranja-marca);
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 800;
+  transition: background var(--trans), transform 80ms;
+}
+
+.btn-primario:hover  { background: var(--laranja-hover); }
+.btn-primario:active { transform: scale(0.97); }
+
+.btn-secundario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border: 2px solid var(--azul-marinho);
+  border-radius: var(--raio-md);
+  background: transparent;
+  color: var(--azul-marinho);
+  font-size: 0.88rem;
+  font-weight: 700;
+  transition: background var(--trans), transform 80ms;
+}
+
+[data-tema="escuro"] .btn-secundario {
+  border-color: #3880FF;
+  color: #3880FF;
+}
+
+.btn-secundario:hover {
+  background: rgba(10, 37, 64, 0.05);
+}
+
+/* ============================================================
+   10. RODAPÉ
+   ============================================================ */
+.rodape {
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--texto-mudo);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   11. RESPONSIVIDADE
+   ============================================================ */
+@media (min-width: 400px) {
+  .celula {
+    width: 60px;
+    height: 60px;
+  }
+  .tecla { max-width: 42px; height: 56px; }
+  .tecla-wide { max-width: 66px; }
+}
+
+@media (min-width: 520px) {
+  .logo-kapivara { font-size: 1.9rem; }
+  .logo-termo { font-size: 1.05rem; }
+  .subtitulo-jogo { font-size: 1rem; }
+
+  .celula {
+    width: 64px;
+    height: 64px;
+    font-size: 1.8rem;
+  }
+
+  .tecla { max-width: 45px; height: 58px; font-size: 1rem; }
+  .tecla-wide { max-width: 70px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
