@@ -176,6 +176,7 @@ button {
   letter-spacing: 2px;
   background: linear-gradient(135deg, #FF6B00 0%, #FF8800 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
   filter: drop-shadow(0 2px 4px var(--laranja-glow));
