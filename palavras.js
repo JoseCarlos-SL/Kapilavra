@@ -9,12 +9,12 @@
 //  - Somente letras de A a Z
 //  - Todas em MAIÚSCULAS
 //
-// Para adicionar uma nova RESPOSTA possível:
-//  → Adicione em PALAVRAS_RESPOSTA (↓ abaixo)
+// PALAVRAS_RESPOSTA:
+//  → Palavras sorteadas para a solução semanal (curadas)
 //
-// Para adicionar apenas como palavra VÁLIDA para tentativas:
-//  → Adicione em PALAVRAS_EXTRAS (↓ mais abaixo)
-//
+// PALAVRAS_EXTRAS:
+//  → Palavras de fallback válidas para tentativas caso a API do
+//    Dicionário Aberto esteja offline ou indisponível
 // ============================================================
 
 /** Lista de palavras que podem ser a resposta semanal (curadas) */
