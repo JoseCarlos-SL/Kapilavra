@@ -283,8 +283,98 @@ function apagarLetra() {
 }
 
 // ============================================================
-// 6. CONFIRMAÇÃO E VALIDAÇÃO DA TENTATIVA
+// 6. CONFIRMAÇÃO E VALIDAÇÃO DA TENTATIVA (DICIONÁRIO ABERTO API)
 // ============================================================
+const CHAVE_CACHE_API = "kapivaTermo_cache_palavras";
+let cachePalavrasAPI = {};
+
+try {
+  const salvo = localStorage.getItem(CHAVE_CACHE_API);
+  if (salvo) cachePalavrasAPI = JSON.parse(salvo);
+} catch (e) {
+  console.warn("Erro ao ler cache do LocalStorage", e);
+}
+
+function salvarCacheAPI(palavra, ehValida) {
+  cachePalavrasAPI[palavra] = ehValida;
+  try {
+    localStorage.setItem(CHAVE_CACHE_API, JSON.stringify(cachePalavrasAPI));
+  } catch (e) {}
+}
+
+/**
+ * Valida se a palavra digitada pelo jogador existe no idioma português.
+ * 1. Soluções oficiais (PALAVRAS_RESPOSTA).
+ * 2. Cache local prévio (LocalStorage).
+ * 3. Dicionário Aberto API (/word e /prefix).
+ * 4. Fallback local (PALAVRAS_EXTRAS) se offline.
+ */
+async function validarPalavraNoDicionarioAPI(palavra) {
+  const palavraUpper = palavra.toUpperCase();
+  const palavraLower = palavra.toLowerCase();
+
+  // 1. Solução garantida / Palavra da lista oficial de respostas
+  if (PALAVRAS_RESPOSTA.includes(palavraUpper)) {
+    return true;
+  }
+
+  // 2. Cache prévio
+  if (cachePalavrasAPI[palavraUpper] !== undefined) {
+    return cachePalavrasAPI[palavraUpper];
+  }
+
+  // 3. Consulta à Dicionário Aberto API
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3500);
+
+    const resWord = await fetch(`https://api.dicionario-aberto.net/word/${palavraLower}`, {
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+
+    if (resWord.ok) {
+      const dataWord = await resWord.json();
+      if (Array.isArray(dataWord) && dataWord.length > 0) {
+        salvarCacheAPI(palavraUpper, true);
+        return true;
+      }
+    }
+
+    // Busca por prefixo para termos com normalização/acentuação
+    const controllerPrefix = new AbortController();
+    const timeoutIdPrefix = setTimeout(() => controllerPrefix.abort(), 3000);
+
+    const resPrefix = await fetch(`https://api.dicionario-aberto.net/prefix/${palavraLower}`, {
+      signal: controllerPrefix.signal
+    });
+    clearTimeout(timeoutIdPrefix);
+
+    if (resPrefix.ok) {
+      const dataPrefix = await resPrefix.json();
+      if (Array.isArray(dataPrefix) && dataPrefix.length > 0) {
+        const existeMatch = dataPrefix.some((item) => {
+          if (!item.word) return false;
+          const normalizado = (item.normalized || item.word).toLowerCase();
+          return normalizado === palavraLower || normalizado.startsWith(palavraLower);
+        });
+
+        if (existeMatch) {
+          salvarCacheAPI(palavraUpper, true);
+          return true;
+        }
+      }
+    }
+
+    // Não encontrada na API
+    salvarCacheAPI(palavraUpper, false);
+    return false;
+  } catch (erro) {
+    console.warn("Dicionário Aberto API offline ou com falha, utilizando fallback local:", erro);
+    return PALAVRAS_VALIDAS.includes(palavraUpper);
+  }
+}
+
 function obterPalavraDigitada() {
   const linhaEl = obterLinhaAtualElemento();
   if (!linhaEl) return "";
@@ -296,7 +386,7 @@ function obterPalavraDigitada() {
   return palavra;
 }
 
-function confirmarTentativa() {
+async function confirmarTentativa() {
   const palavra = obterPalavraDigitada();
 
   // 1. Verifica tamanho
@@ -305,17 +395,29 @@ function confirmarTentativa() {
     return;
   }
 
-  // 2. Verifica se a palavra existe no dicionário
-  if (!PALAVRAS_VALIDAS.includes(palavra)) {
+  if (digitacaoBloqueada) return;
+
+  const btnEnter = document.querySelector('.tecla[data-tecla="Enter"]');
+  if (btnEnter) {
+    btnEnter.classList.add("tecla-carregando");
+  }
+  digitacaoBloqueada = true;
+
+  // 2. Verifica se a palavra existe via API
+  const ehValida = await validarPalavraNoDicionarioAPI(palavra);
+
+  if (btnEnter) {
+    btnEnter.classList.remove("tecla-carregando");
+  }
+
+  if (!ehValida) {
+    digitacaoBloqueada = false;
     animarLinhaInvalida("Palavra não encontrada");
     return;
   }
 
   // 3. Avalia o resultado (Verde / Laranja / Cinza) com tratamento de letras repetidas
   const resultado = avaliarPalavra(palavra, estadoJogo.palavraSecreta);
-
-  // Trava a digitação durante as animações
-  digitacaoBloqueada = true;
 
   // Registra no estado
   estadoJogo.tentativas.push(palavra);

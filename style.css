@@ -1,85 +1,107 @@
 /* ============================================================
-   KapivaTermo — Estilos Globais (Novo Design)
-   Inspirado no protótipo: Logo Kapivara (Laranja) + Termo (Azul Marinho)
-   Bordas do tabuleiro em Azul Marinho, Teclado com teclas Marinho e Enter/Apagar Laranja
+   KapivaTermo / Kapilavra — Estilos Globais Modernos (Vibrante & Premium)
+   Inspirado no protótipo: Brand Laranja (#FF6B00) + Azul Marinho (#0A2540)
+   Suporte a Temas Claro e Escuro, Glassmorphism, Efeitos 3D e Animações Fluidas
    ============================================================ */
 
 /* ============================================================
    1. VARIÁVEIS E TEMAS
    ============================================================ */
 :root {
-  /* Cores da Identidade Visual */
-  --laranja-marca:  #FF6B00;
-  --laranja-hover:  #e05e00;
-  --azul-marinho:   #0A2540;
-  --azul-hover:     #071a2e;
+  /* Marca e Destaques */
+  --laranja-marca:      #FF6B00;
+  --laranja-hover:      #E05E00;
+  --laranja-glow:       rgba(255, 107, 0, 0.25);
   
-  --verde-acerto:   #22A06B;
-  --laranja-alerta: #F7941D;
-  --cinza-erro:     #6B7280;
+  --azul-marinho:       #0A2540;
+  --azul-hover:         #0E3358;
+  --azul-glow:          rgba(10, 37, 64, 0.2);
+
+  /* Status das Letras */
+  --verde-acerto:       #10B981;
+  --verde-acerto-glow:  rgba(16, 185, 129, 0.35);
+  --laranja-alerta:     #F59E0B;
+  --laranja-alerta-glow:rgba(245, 158, 11, 0.35);
+  --cinza-erro:         #64748B;
 
   /* Superfícies (Tema Claro) */
-  --bg:             #FFFFFF;
-  --superficie:     #FFFFFF;
-  --texto:          #0A2540;
-  --subtitulo:      #0A2540;
-  --texto-mudo:     #6B7280;
-  --borda:          #E2E8F0;
-  --borda-forte:    #CBD5E1;
+  --bg:                 #F8FAFC;
+  --bg-gradiente:       linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 100%);
+  --superficie:         #FFFFFF;
+  --header-bg:          rgba(255, 255, 255, 0.85);
+  --header-borda:       rgba(226, 232, 240, 0.8);
+  
+  --texto:              #0F172A;
+  --subtitulo:          #475569;
+  --texto-mudo:         #64748B;
+  --borda:              #E2E8F0;
+  --borda-forte:        #CBD5E1;
 
   /* Células do tabuleiro */
   --celula-bg:          #FFFFFF;
   --celula-borda:       #0A2540;
   --celula-borda-ativa: #FF6B00;
   --celula-borda-cheia: #0A2540;
-  --celula-texto:       #0A2540;
+  --celula-texto:       #0F172A;
+  --celula-sombra:      0 4px 12px rgba(10, 37, 64, 0.06);
 
   /* Teclas */
   --tecla-bg:           #0A2540;
-  --tecla-hover:        #153a5e;
+  --tecla-hover:        #153D66;
+  --tecla-active:       #071A2E;
   --tecla-texto:        #FFFFFF;
   
   --tecla-especial-bg:    #FF6B00;
-  --tecla-especial-hover: #e05e00;
+  --tecla-especial-hover: #E05E00;
   --tecla-especial-texto: #FFFFFF;
 
-  /* Modais */
-  --modal-bg:     #FFFFFF;
-  --overlay:      rgba(10, 37, 64, 0.5);
+  /* Modais e Overlays */
+  --modal-bg:           #FFFFFF;
+  --overlay:            rgba(15, 23, 42, 0.6);
+  --modal-sombra:       0 25px 50px -12px rgba(0, 0, 0, 0.25);
 
   /* Utilitários */
-  --raio-sm:    6px;
-  --raio-md:    10px;
-  --raio-lg:    18px;
-  --trans:      150ms ease;
+  --raio-sm:    8px;
+  --raio-md:    12px;
+  --raio-lg:    20px;
+  --raio-pill:  999px;
+  --trans-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --trans-smooth: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Tema Escuro */
 [data-tema="escuro"] {
-  --bg:             #0B131F;
-  --superficie:     #142032;
-  --texto:          #F8FAFC;
-  --subtitulo:      #94A3B8;
-  --texto-mudo:     #94A3B8;
-  --borda:          #1E293B;
-  --borda-forte:    #334155;
+  --bg:                 #0B0F19;
+  --bg-gradiente:       linear-gradient(180deg, #0F172A 0%, #080C14 100%);
+  --superficie:         #1E293B;
+  --header-bg:          rgba(15, 23, 42, 0.85);
+  --header-borda:       rgba(30, 41, 59, 0.8);
 
-  --celula-bg:          #142032;
+  --texto:              #F8FAFC;
+  --subtitulo:          #94A3B8;
+  --texto-mudo:         #94A3B8;
+  --borda:              #1E293B;
+  --borda-forte:        #334155;
+
+  --celula-bg:          #111827;
   --celula-borda:       #3880FF;
   --celula-borda-ativa: #FF6B00;
   --celula-borda-cheia: #3880FF;
   --celula-texto:       #F8FAFC;
+  --celula-sombra:      0 4px 14px rgba(0, 0, 0, 0.4);
 
   --tecla-bg:           #1E293B;
   --tecla-hover:        #334155;
+  --tecla-active:       #0F172A;
   --tecla-texto:        #F8FAFC;
 
-  --modal-bg:  #142032;
-  --overlay:   rgba(0, 0, 0, 0.75);
+  --modal-bg:           #111827;
+  --overlay:            rgba(0, 0, 0, 0.8);
+  --modal-sombra:       0 25px 50px -12px rgba(0, 0, 0, 0.6);
 }
 
 /* ============================================================
-   2. RESET E BASE
+   2. RESET E ESTRUTURA BASE
    ============================================================ */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -90,29 +112,35 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  height: 100%;
 }
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--bg);
+  background: var(--bg);
+  background-image: var(--bg-gradiente);
   color: var(--texto);
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  transition: background-color 200ms ease, color 200ms ease;
+  transition: background 300ms ease, color 300ms ease;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 button {
   font-family: inherit;
   cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
 }
 
 /* ============================================================
-   3. CABEÇALHO
+   3. CABEÇALHO (GLASSMORPHISM & BRANDING)
    ============================================================ */
 .cabecalho {
-  padding: 12px 16px 10px;
+  padding: 14px 20px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -120,11 +148,16 @@ button {
   top: 0;
   z-index: 20;
   flex-shrink: 0;
+  background: var(--header-bg);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border-bottom: 1px solid var(--header-borda);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
 .cabecalho-topo {
   width: 100%;
-  max-width: 480px;
+  max-width: 500px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -138,63 +171,60 @@ button {
 }
 
 .logo-kapivara {
-  font-size: 1.65rem;
+  font-size: 1.75rem;
   font-weight: 900;
-  letter-spacing: 1px;
-  color: var(--laranja-marca);
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #FF6B00 0%, #FF8800 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-transform: uppercase;
-}
-
-.logo-termo {
-  font-size: 0.95rem;
-  font-weight: 800;
-  letter-spacing: 3px;
-  color: var(--azul-marinho);
-  margin-top: 2px;
-  text-transform: uppercase;
-}
-
-[data-tema="escuro"] .logo-termo {
-  color: #3880FF;
+  filter: drop-shadow(0 2px 4px var(--laranja-glow));
 }
 
 .subtitulo-jogo {
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--subtitulo);
-  margin-top: 14px;
+  margin-top: 6px;
   text-align: center;
+  letter-spacing: 0.3px;
 }
 
-/* Botões do topo */
+/* Botões de Ação do Topo */
 .cabecalho-direitos {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .btn-topo {
-  width: 38px;
-  height: 38px;
-  border: none;
-  background: transparent;
-  color: var(--laranja-marca);
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background var(--trans), transform 80ms;
+  color: var(--laranja-marca);
+  background: rgba(255, 107, 0, 0.08);
+  border: 1px solid rgba(255, 107, 0, 0.15);
+  transition: all var(--trans-fast);
 }
 
-.btn-topo:hover  { background: rgba(255, 107, 0, 0.1); }
-.btn-topo:active { transform: scale(0.90); }
+.btn-topo:hover {
+  background: var(--laranja-marca);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--laranja-glow);
+}
+
+.btn-topo:active {
+  transform: translateY(0) scale(0.95);
+}
+
 .btn-topo:focus-visible {
   outline: 2px solid var(--laranja-marca);
   outline-offset: 2px;
-}
-
-.btn-ajuda-circulo {
-  color: var(--laranja-marca);
 }
 
 /* ============================================================
@@ -205,23 +235,27 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 12px 12px 16px;
-  gap: 14px;
+  justify-content: space-between;
+  padding: 16px 12px 20px;
+  gap: 16px;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
 }
 
 /* ============================================================
-   5. MENSAGENS TOAST
+   5. MENSAGENS TOAST (NOTIFICAÇÕES FLUTUANTES)
    ============================================================ */
 .area-mensagem {
   position: fixed;
-  top: 70px;
+  top: 80px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 60;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   pointer-events: none;
   width: max-content;
   max-width: 90vw;
@@ -230,13 +264,20 @@ button {
 .toast {
   background-color: var(--azul-marinho);
   color: #FFFFFF;
-  padding: 9px 20px;
-  border-radius: 99px;
-  font-size: 0.88rem;
+  padding: 10px 22px;
+  border-radius: var(--raio-pill);
+  font-size: 0.9rem;
   font-weight: 700;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  animation: toastEntrar 180ms ease forwards;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: toastEntrar 200ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   white-space: nowrap;
+  letter-spacing: 0.3px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+[data-tema="escuro"] .toast {
+  background-color: #1E293B;
+  border-color: #334155;
 }
 
 .toast-saindo {
@@ -244,38 +285,40 @@ button {
 }
 
 @keyframes toastEntrar {
-  from { opacity: 0; transform: translateY(-10px) scale(0.92); }
-  to   { opacity: 1; transform: none; }
+  from { opacity: 0; transform: translateY(-16px) scale(0.9); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @keyframes toastSair {
-  to { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 0; transform: translateY(-12px) scale(0.95); }
 }
 
 /* ============================================================
-   6. TABULEIRO
+   6. TABULEIRO DE TENTATIVAS
    ============================================================ */
 .secao-tabuleiro {
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex: 1;
 }
 
 #tabuleiro {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+  perspective: 1000px;
 }
 
 .linha-tabuleiro {
   display: flex;
-  gap: 6px;
+  gap: 8px;
 }
 
-/* Células estilo moldura da imagem (Borda azul marinho espessa) */
 .celula {
-  width: 56px;
-  height: 56px;
+  width: 58px;
+  height: 58px;
   border: 2px solid var(--celula-borda);
   border-radius: var(--raio-md);
   background-color: var(--celula-bg);
@@ -283,55 +326,79 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.6rem;
+  font-size: 1.75rem;
   font-weight: 800;
   text-transform: uppercase;
   user-select: none;
-  transition: border-color var(--trans), background-color var(--trans);
+  box-shadow: var(--celula-sombra);
+  transition: border-color var(--trans-fast), background-color var(--trans-fast), transform 200ms ease;
+  backface-visibility: hidden;
 }
 
-/* Borda destaca na célula ativa */
+/* Destacando linha ativa */
 .linha-ativa .celula:not(.revelada) {
   border-color: var(--celula-borda-ativa);
+  box-shadow: 0 0 0 3px var(--laranja-glow);
 }
 
-/* Cores reveladas */
-.celula.revelada.correta  { background: var(--verde-acerto);   border-color: var(--verde-acerto);   color: #fff; }
-.celula.revelada.presente { background: var(--laranja-alerta); border-color: var(--laranja-alerta); color: #fff; }
-.celula.revelada.ausente  { background: var(--cinza-erro);    border-color: var(--cinza-erro);    color: #fff; }
+/* Células preenchidas antes de revelar */
+.celula.preenchida:not(.revelada) {
+  border-color: var(--celula-borda-cheia);
+}
+
+/* Revelação de Cores com Sombra/Glow */
+.celula.revelada.correta {
+  background: var(--verde-acerto) !important;
+  border-color: var(--verde-acerto) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 15px var(--verde-acerto-glow);
+}
+
+.celula.revelada.presente {
+  background: var(--laranja-alerta) !important;
+  border-color: var(--laranja-alerta) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 15px var(--laranja-alerta-glow);
+}
+
+.celula.revelada.ausente {
+  background: var(--cinza-erro) !important;
+  border-color: var(--cinza-erro) !important;
+  color: #FFFFFF !important;
+}
 
 /* ============================================================
-   7. ANIMAÇÕES DO TABULEIRO
+   7. ANIMAÇÕES DO TABULEIRO (3D FLIP, POP, SHAKE, BOUNCE)
    ============================================================ */
 @keyframes pop {
   0%   { transform: scale(1); }
-  45%  { transform: scale(1.12); }
+  50%  { transform: scale(1.15); }
   100% { transform: scale(1); }
 }
 
 @keyframes shake {
-  0%,100% { transform: translateX(0); }
-  15%  { transform: translateX(-6px); }
-  30%  { transform: translateX(6px); }
-  45%  { transform: translateX(-5px); }
-  60%  { transform: translateX(5px); }
+  0%, 100% { transform: translateX(0); }
+  15%  { transform: translateX(-8px); }
+  30%  { transform: translateX(8px); }
+  45%  { transform: translateX(-6px); }
+  60%  { transform: translateX(6px); }
   75%  { transform: translateX(-3px); }
   90%  { transform: translateX(3px); }
 }
 
 @keyframes bounce {
-  0%,100% { transform: translateY(0); }
-  30% { transform: translateY(-18px); }
-  60% { transform: translateY(-9px); }
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-20px); }
+  60% { transform: translateY(-10px); }
   80% { transform: translateY(-4px); }
 }
 
-.anim-pop    { animation: pop    120ms ease; }
-.anim-shake  { animation: shake  480ms ease; }
-.anim-bounce { animation: bounce 620ms ease; }
+.anim-pop    { animation: pop 130ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+.anim-shake  { animation: shake 500ms ease; }
+.anim-bounce { animation: bounce 650ms ease; }
 
 /* ============================================================
-   8. TECLADO VIRTUAL (Inspirado no Design da Imagem)
+   8. TECLADO VIRTUAL
    ============================================================ */
 .secao-teclado {
   width: 100%;
@@ -343,24 +410,23 @@ button {
 #teclado {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
   width: 100%;
-  max-width: 480px;
+  max-width: 500px;
 }
 
 .linha-teclado {
   display: flex;
   justify-content: center;
-  gap: 4px;
+  gap: 5px;
+  touch-action: manipulation;
 }
 
-/* Teclas gerais em Azul Marinho */
 .tecla {
   flex: 1;
   min-width: 0;
-  max-width: 40px;
-  height: 54px;
-  border: none;
+  max-width: 44px;
+  height: 56px;
   border-radius: var(--raio-md);
   background-color: var(--tecla-bg);
   color: var(--tecla-texto);
@@ -369,46 +435,82 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background var(--trans), color var(--trans), transform 80ms;
+  transition: background-color var(--trans-fast), transform 80ms ease, box-shadow var(--trans-fast);
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
-/* Teclas Especiais (ENTER e APAGAR em Laranja) */
-.tecla-wide {
-  flex: 1.5;
-  max-width: 64px;
-  background-color: var(--tecla-especial-bg);
-  color: var(--tecla-especial-texto);
-  font-size: 0.8rem;
-  font-weight: 800;
-  text-transform: uppercase;
+.tecla:hover {
+  background-color: var(--tecla-hover);
+  transform: translateY(-1px);
 }
 
-.tecla:hover             { background-color: var(--tecla-hover); }
-.tecla-wide:hover        { background-color: var(--tecla-especial-hover); }
-.tecla:active            { transform: scale(0.92); }
+.tecla:active {
+  background-color: var(--tecla-active);
+  transform: translateY(1px) scale(0.94);
+  box-shadow: none;
+}
+
 .tecla:focus-visible {
   outline: 2px solid var(--laranja-marca);
   outline-offset: 2px;
 }
 
-/* Cores das teclas quando reveladas */
-.tecla.correta  { background: var(--verde-acerto) !important;   color: #fff !important; }
-.tecla.presente { background: var(--laranja-alerta) !important; color: #fff !important; }
-.tecla.ausente  { background: #475569 !important;               color: #fff !important; opacity: 0.7; }
+/* Teclas Especiais (ENTER / APAGAR) */
+.tecla-wide {
+  flex: 1.6;
+  max-width: 68px;
+  background-color: var(--tecla-especial-bg);
+  color: var(--tecla-especial-texto);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.tecla-wide:hover {
+  background-color: var(--tecla-especial-hover);
+  box-shadow: 0 4px 12px var(--laranja-glow);
+}
+
+/* Indicador de Carregamento na tecla Enter ao consultar API */
+.tecla-carregando {
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.tecla-carregando::after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border: 2px solid #FFFFFF;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spinner 600ms linear infinite;
+  margin-left: 4px;
+}
+
+@keyframes spinner {
+  to { transform: rotate(360deg); }
+}
+
+/* Cores das Teclas Reveladas */
+.tecla.correta  { background: var(--verde-acerto) !important;   color: #FFFFFF !important; box-shadow: 0 2px 8px var(--verde-acerto-glow); }
+.tecla.presente { background: var(--laranja-alerta) !important; color: #FFFFFF !important; box-shadow: 0 2px 8px var(--laranja-alerta-glow); }
+.tecla.ausente  { background: #475569 !important;               color: #FFFFFF !important; opacity: 0.65; }
 
 /* ============================================================
-   9. OVERLAY E MODAIS
+   9. OVERLAY E MODAIS (ESTATÍSTICAS & AJUDA)
    ============================================================ */
 .modal-overlay {
   position: fixed;
   inset: 0;
   background-color: var(--overlay);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 90;
+  transition: opacity 200ms ease;
 }
 
 .modal-overlay[hidden] { display: none; }
@@ -421,100 +523,98 @@ button {
   justify-content: center;
   z-index: 100;
   padding: 16px;
-  pointer-events: none;
 }
 
 .modal[hidden] { display: none; }
 
 .modal-caixa {
-  pointer-events: auto;
   background-color: var(--modal-bg);
   border-radius: var(--raio-lg);
   width: 100%;
-  max-width: 440px;
-  max-height: 88vh;
+  max-width: 460px;
+  max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-  animation: entrarModal 240ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: var(--modal-sombra);
+  border: 1px solid var(--borda);
+  animation: entrarModal 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes entrarModal {
-  from { opacity: 0; transform: scale(0.86) translateY(24px); }
-  to   { opacity: 1; transform: none; }
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .modal-cabecalho {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 20px 0;
+  padding: 20px 24px 12px;
   position: sticky;
   top: 0;
   background-color: var(--modal-bg);
   z-index: 1;
+  border-bottom: 1px solid var(--borda);
 }
 
 .modal-cabecalho h2 {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: var(--texto);
 }
 
 .btn-fechar {
-  width: 34px;
-  height: 34px;
-  border: none;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: var(--borda);
   color: var(--texto-mudo);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background var(--trans), color var(--trans);
-  flex-shrink: 0;
+  transition: all var(--trans-fast);
 }
 
 .btn-fechar:hover {
-  background: var(--borda-forte);
-  color: var(--texto);
+  background: var(--laranja-marca);
+  color: #FFFFFF;
 }
 
 .modal-corpo {
-  padding: 16px 20px 24px;
+  padding: 20px 24px 28px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 /* Modal Ajuda */
 .ajuda-intro {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   line-height: 1.6;
   color: var(--texto);
 }
 
 .modal-corpo h3 {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.8px;
   color: var(--texto-mudo);
 }
 
 .exemplo-bloco {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .exemplo-linha {
   display: flex;
-  gap: 4px;
+  gap: 6px;
 }
 
 .celula-ex {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--raio-md);
   border: 2px solid var(--celula-borda);
   background-color: var(--celula-bg);
@@ -522,22 +622,22 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 800;
 }
 
-.celula-ex.correta  { background: var(--verde-acerto);   border-color: var(--verde-acerto);   color: #fff; }
-.celula-ex.presente { background: var(--laranja-alerta); border-color: var(--laranja-alerta); color: #fff; }
-.celula-ex.ausente  { background: var(--cinza-erro);    border-color: var(--cinza-erro);    color: #fff; }
-.celula-ex.cinza    { background: var(--cinza-erro);    border-color: var(--cinza-erro);    color: #fff; }
+.celula-ex.correta  { background: var(--verde-acerto);   border-color: var(--verde-acerto);   color: #FFF; }
+.celula-ex.presente { background: var(--laranja-alerta); border-color: var(--laranja-alerta); color: #FFF; }
+.celula-ex.ausente,
+.celula-ex.cinza    { background: var(--cinza-erro);    border-color: var(--cinza-erro);    color: #FFF; }
 
 .badge {
   display: inline-block;
-  padding: 2px 9px;
-  border-radius: 99px;
-  font-size: 0.74rem;
+  padding: 3px 10px;
+  border-radius: var(--raio-pill);
+  font-size: 0.76rem;
   font-weight: 700;
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .badge-verde   { background: var(--verde-acerto); }
@@ -545,67 +645,72 @@ button {
 .badge-cinza   { background: var(--cinza-erro); }
 
 .ajuda-rodape {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--texto-mudo);
   text-align: center;
   border-top: 1px solid var(--borda);
-  padding-top: 10px;
+  padding-top: 14px;
 }
 
 /* Modal Estatísticas */
 .stats-resumo {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
+  gap: 8px;
   text-align: center;
 }
 
 .stat-item {
+  background: var(--bg);
+  padding: 12px 6px;
+  border-radius: var(--raio-md);
+  border: 1px solid var(--borda);
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 
 .stat-valor {
-  font-size: 1.55rem;
-  font-weight: 800;
+  font-size: 1.6rem;
+  font-weight: 900;
   color: var(--laranja-marca);
   line-height: 1;
 }
 
 .stat-label {
-  font-size: 0.62rem;
-  font-weight: 700;
+  font-size: 0.65rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.5px;
   color: var(--texto-mudo);
 }
 
 .dist-titulo {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.8px;
   color: var(--texto-mudo);
+  margin-top: 6px;
 }
 
 .distribuicao {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
 }
 
 .dist-linha {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .dist-numero {
-  font-size: 0.82rem;
-  font-weight: 700;
+  font-size: 0.85rem;
+  font-weight: 800;
   color: var(--texto-mudo);
-  min-width: 14px;
+  min-width: 16px;
   text-align: center;
 }
 
@@ -613,7 +718,7 @@ button {
   flex: 1;
   background-color: var(--borda);
   border-radius: var(--raio-sm);
-  height: 24px;
+  height: 26px;
   overflow: hidden;
 }
 
@@ -624,34 +729,41 @@ button {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 8px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #fff;
-  min-width: 24px;
-  transition: width 500ms ease;
+  padding-right: 10px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  min-width: 26px;
+  transition: width 500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.dist-barra-atual { background-color: var(--laranja-marca); }
+[data-tema="escuro"] .dist-barra {
+  background-color: #3880FF;
+}
 
-/* Modal Resultado */
+.dist-barra-atual {
+  background-color: var(--laranja-marca) !important;
+  box-shadow: 0 0 10px var(--laranja-glow);
+}
+
+/* Modal Resultado Final */
 .resultado-msg {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--texto);
   text-align: center;
   font-weight: 600;
 }
 
 .resultado-palavra {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--texto);
   text-align: center;
 }
 
 .resultado-palavra strong {
   color: var(--laranja-marca);
-  font-size: 1.15rem;
-  font-weight: 800;
+  font-size: 1.25rem;
+  font-weight: 900;
   letter-spacing: 2px;
 }
 
@@ -659,56 +771,64 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  padding: 12px;
+  gap: 4px;
+  padding: 14px;
   background: var(--bg);
   border-radius: var(--raio-md);
   border: 1px solid var(--borda);
 }
 
 .emoji-linha {
-  font-size: 1.35rem;
-  letter-spacing: 2px;
-  line-height: 1.3;
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  line-height: 1.4;
 }
 
 .resultado-acoes {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+  margin-top: 6px;
 }
 
 .btn-primario {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 12px 24px;
-  border: none;
+  gap: 10px;
+  padding: 14px 24px;
   border-radius: var(--raio-md);
   background: var(--laranja-marca);
-  color: #fff;
-  font-size: 0.92rem;
+  color: #FFFFFF;
+  font-size: 0.95rem;
   font-weight: 800;
-  transition: background var(--trans), transform 80ms;
+  transition: all var(--trans-fast);
+  box-shadow: 0 4px 15px var(--laranja-glow);
 }
 
-.btn-primario:hover  { background: var(--laranja-hover); }
-.btn-primario:active { transform: scale(0.97); }
+.btn-primario:hover {
+  background: var(--laranja-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--laranja-glow);
+}
+
+.btn-primario:active {
+  transform: translateY(0) scale(0.97);
+}
 
 .btn-secundario {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 10px 24px;
+  gap: 10px;
+  padding: 12px 24px;
   border: 2px solid var(--azul-marinho);
   border-radius: var(--raio-md);
   background: transparent;
   color: var(--azul-marinho);
-  font-size: 0.88rem;
-  font-weight: 700;
-  transition: background var(--trans), transform 80ms;
+  font-size: 0.9rem;
+  font-weight: 800;
+  transition: all var(--trans-fast);
 }
 
 [data-tema="escuro"] .btn-secundario {
@@ -717,45 +837,46 @@ button {
 }
 
 .btn-secundario:hover {
-  background: rgba(10, 37, 64, 0.05);
+  background: rgba(10, 37, 64, 0.08);
+  transform: translateY(-1px);
 }
 
 /* ============================================================
    10. RODAPÉ
    ============================================================ */
 .rodape {
-  padding: 12px 16px;
+  padding: 14px 16px;
   text-align: center;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   color: var(--texto-mudo);
   flex-shrink: 0;
+  border-top: 1px solid var(--borda);
 }
 
 /* ============================================================
-   11. RESPONSIVIDADE
+   11. RESPONSIVIDADE E ADAPTAÇÃO
    ============================================================ */
 @media (min-width: 400px) {
   .celula {
-    width: 60px;
-    height: 60px;
+    width: 62px;
+    height: 62px;
   }
-  .tecla { max-width: 42px; height: 56px; }
-  .tecla-wide { max-width: 66px; }
+  .tecla { max-width: 45px; height: 58px; }
+  .tecla-wide { max-width: 72px; }
 }
 
 @media (min-width: 520px) {
-  .logo-kapivara { font-size: 1.9rem; }
-  .logo-termo { font-size: 1.05rem; }
-  .subtitulo-jogo { font-size: 1rem; }
+  .logo-kapivara { font-size: 2.1rem; }
+  .subtitulo-jogo { font-size: 0.95rem; }
 
   .celula {
-    width: 64px;
-    height: 64px;
-    font-size: 1.8rem;
+    width: 66px;
+    height: 66px;
+    font-size: 1.9rem;
   }
 
-  .tecla { max-width: 45px; height: 58px; font-size: 1rem; }
-  .tecla-wide { max-width: 70px; }
+  .tecla { max-width: 48px; height: 60px; font-size: 1.05rem; }
+  .tecla-wide { max-width: 76px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
