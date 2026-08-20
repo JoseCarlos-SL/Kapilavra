@@ -9,7 +9,7 @@
    ============================================================ */
 :root {
   /* Marca e Destaques */
-  --laranja-marca:      #FF6B00;
+  --laranja-marca:      #09ff00;
   --laranja-hover:      #E05E00;
   --laranja-glow:       rgba(255, 107, 0, 0.25);
   
@@ -175,7 +175,7 @@ button {
   font-size: 1.6rem;
   font-weight: 900;
   letter-spacing: 2px;
-  background: linear-gradient(135deg, #FF6B00 0%, #FF8800 100%);
+  background: linear-gradient(135deg, #48ff00 0%, #33ff00 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
